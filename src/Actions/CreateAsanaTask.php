@@ -2,20 +2,29 @@
 
 namespace SteadfastCollective\StatamicAsana\Actions;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Http\Client\ConnectionException;
+use Exception;
 use Illuminate\Support\Facades\Http;
 use SteadfastCollective\StatamicAsana\DTO\AsanaTaskData;
 
+/**
+ * Given an AsanaTaskData object - make the API request to to create the task in Asana.
+ */
 class CreateAsanaTask
 {
     private AsanaTaskData $asanaTaskData;
 
-    public function handle(AsanaTaskData $asanaTaskData): void
+    /**
+     * Create a task and return the permalink URL of the created task.
+     */
+    public function handle(AsanaTaskData $asanaTaskData): string
     {
         $this->asanaTaskData = $asanaTaskData;
 
         $this->validateConfig();
 
-        $this->sendApiRequest();
+        return $this->sendApiRequest();
     }
 
     /**
@@ -23,7 +32,7 @@ class CreateAsanaTask
      *
      * @see https://developers.asana.com/reference/createtask
      */
-    public function sendApiRequest(): void
+    public function sendApiRequest(): string
     {
         $response = Http::withToken(config('statamic-asana.api_personal_access_token'))
             ->post('https://app.asana.com/api/1.0/tasks', [
@@ -35,7 +44,7 @@ class CreateAsanaTask
             throw new \Exception('Failed to create Asana Task: '.$response->body());
         }
 
-        logger()->info('Created Asana Task from Contact Form: '.$response->json('data.permalink_url'));
+        return $response->json('data.permalink_url');
     }
 
     /**

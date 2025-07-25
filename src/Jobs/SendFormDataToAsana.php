@@ -13,6 +13,8 @@ use SteadfastCollective\StatamicAsana\Actions\CreateAsanaTask;
 use SteadfastCollective\StatamicAsana\DTO\AsanaTaskData;
 
 /**
+ * This is a queueable job which creates an AsanaTask from a Statamic Form Submission.
+ *
  * ShouldBeEncrypted is used because the queue contains sensitive data.
  */
 class SendFormDataToAsana implements ShouldBeEncrypted, ShouldQueue
@@ -32,6 +34,8 @@ class SendFormDataToAsana implements ShouldBeEncrypted, ShouldQueue
 
         $action = new CreateAsanaTask;
 
-        $action->handle($data);
+        $permalink = $action->handle($data);
+
+        logger()->info('Created Asana Task from Contact Form: '.$permalink);
     }
 }

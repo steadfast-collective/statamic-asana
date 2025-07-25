@@ -16,6 +16,8 @@ class ServiceProvider extends AddonServiceProvider
 
     public function bootAddon(): void
     {
+        // When we update to support Statamic 5 - we can use this to append config fields to the form config.
+        //
         //     \Statamic\Facades\Form::appendConfigFields('*', __('Configuration of something else'), [
         //         'data' => [
         //             'type' => 'grid',

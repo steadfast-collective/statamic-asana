@@ -5,6 +5,9 @@ namespace SteadfastCollective\StatamicAsana\Listeners;
 use Statamic\Events\FormSubmitted;
 use SteadfastCollective\StatamicAsana\Jobs\SendFormDataToAsana;
 
+/**
+ * Listens for form submissions and dispatches a job to send the data to Asana.
+ */
 class StatamicAsanaFormListener
 {
     public function handle(FormSubmitted $event): bool
