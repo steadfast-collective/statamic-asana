@@ -1,17 +1,17 @@
 # Statamic Asana
-<div style="text-align: center">
-    <img style="max-height: 150px" alt="A Statamic troll posting a letter into an Asana post box" src="./resources/images/statamic-asana-logo.png">
-</div>
+<p align="center">
+    <img height="250px" float="right" alt="A Statamic troll posting a letter into an Asana post box" src="./resources/images/statamic-asana-logo.png">
+</p>
 
 ## Description
 
-> Statamic Asana is a Statamic addon that captures form submissions and creates tasks in Asana based on them.
-
-<img alt="Screenshot of an Asana task containing form submission data" style="max-height: 450px;" src="./resources/images/task-preview.png">
-
-## Features
+Statamic Asana is a Statamic addon that captures form submissions and creates tasks in Asana based on them.
 
 This addon is triggered when a Statamic form is submitted and creates a task in Asana containing all the relevant data.
+
+<p align="center">
+    <img alt="Screenshot of an Asana task containing form submission data" height="450px" src="./resources/images/task-preview.png">
+</p>
 
 ## Quirks
 
