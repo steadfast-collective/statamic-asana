@@ -1,0 +1,43 @@
+name: Test Suite
+
+on:
+  workflow_dispatch:
+    pull_request:
+    types: [ opened, synchronize, reopened, converted_to_draft ]
+
+
+jobs:
+  php_tests:
+    if: "!contains(github.event.head_commit.message, 'changelog')"
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        php: [ 8.2, 8.3, 8.4 ]
+        laravel: [ 10.*, 11.*, 12.* ]
+        stability: [ prefer-lowest, prefer-stable ]
+        os: [ ubuntu-latest ]
+        exclude:
+        - php: 8.4
+          laravel: 10.*
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+
+    - name: Install dependencies
+      run: |
+        composer require "illuminate/contracts:${{ matrix.laravel }}" --no-interaction --no-update
+        composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-suggest
+
+    - name: Run PHPUnit
+      run: vendor/bin/phpunit
