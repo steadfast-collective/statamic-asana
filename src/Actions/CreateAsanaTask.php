@@ -2,8 +2,6 @@
 
 namespace SteadfastCollective\StatamicAsana\Actions;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Http\Client\ConnectionException;
 use Exception;
 use Illuminate\Support\Facades\Http;
 use SteadfastCollective\StatamicAsana\DTO\AsanaTaskData;

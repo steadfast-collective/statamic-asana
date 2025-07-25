@@ -25,7 +25,13 @@ class CreateAsanaTaskTest extends TestCase
 
     public function test_it_calls_the_asana_api()
     {
-        Http::fake();
+        Http::fake([
+            '*' => Http::response([
+                'data' => [
+                    'permalink_url' => 'https://example.com/permalink',
+                ],
+            ], 200),
+        ]);
 
         $action = new CreateAsanaTask;
 
@@ -58,7 +64,6 @@ class CreateAsanaTaskTest extends TestCase
                         config('statamic-asana.project_gid'),
                     ],
                     'workspace' => config('statamic-asana.workspace_gid'),
-                    'assignee' => config('statamic-asana.assignee_gid'),
                 ],
             ],
                 $request->data()
@@ -76,7 +81,13 @@ class CreateAsanaTaskTest extends TestCase
     {
         config('statamic-asana.assignee_gid', '');
 
-        Http::fake();
+        Http::fake([
+            '*' => Http::response([
+                'data' => [
+                    'permalink_url' => 'https://example.com/permalink',
+                ],
+            ], 200),
+        ]);
 
         $form = new Form;
         $form->set('name', 'Some Name');
