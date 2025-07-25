@@ -3,3 +3,4 @@ vendor
 mix-manifest.json
 ray.php
 phpstan.neon
+.phpunit.result.cache
