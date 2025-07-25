@@ -1,0 +1,64 @@
+{
+    "name": "steadfast-collective/statamic-asana",
+    "autoload": {
+        "psr-4": {
+            "SteadfastCollective\\StatamicAsana\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SteadfastCollective\\StatamicAsana\\Tests\\": "tests"
+        }
+    },
+    "keywords": [
+        "statamic",
+        "asana",
+        "addon",
+        "forms"
+    ],
+    "type": "statamic-addon",
+    "require": {
+        "php": "^8.3",
+        "laravel/framework": "^10.0 || ^11.0 || ^12.0",
+        "statamic/cms": "^4 || ^5"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.21",
+        "orchestra/testbench": "^9.0 || ^10.0",
+        "phpunit/phpunit": "^10.5|^11.0",
+        "spatie/laravel-ray": "^1.0",
+        "larastan/larastan": "^3.0",
+        "statamic/cms": "^5"
+    },
+    "scripts": {
+        "lint": "pint -v",
+        "test:lint": "pint --test -v",
+        "test:types": "phpstan analyse --ansi",
+        "test:feature": [
+            "@putenv XDEBUG_MODE=coverage",
+            "phpunit --colors=always"
+        ],
+        "test": [
+            "@test:lint",
+            "@test:types",
+            "@test:feature"
+        ]
+
+    },
+    "extra": {
+        "statamic": {
+            "name": "Statamic Asana",
+            "description": "Statamic Asana addon"
+        },
+        "laravel": {
+            "providers": [
+                "SteadfastCollective\\StatamicAsana\\ServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pixelfear/composer-dist-plugin": true
+        }
+    }
+}
