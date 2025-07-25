@@ -2,7 +2,7 @@ name: Test Suite
 
 on:
     workflow_dispatch:
-        pull_request:
+    pull_request:
         types: [opened, synchronize, reopened, converted_to_draft]
 
 jobs:
