@@ -1,0 +1,9 @@
+parameters:
+    level: 5
+    paths:
+        - src
+        - tests
+    reportUnmatchedIgnoredErrors: false
+
+    ignoreErrors:
+        - message: '#on an unknown class Spatie\\.*\\Ray#'
