@@ -20,7 +20,6 @@ class CreateAsanaTaskTest extends TestCase
             'statamic-asana.api_personal_access_token' => $this->faker->uuid(),
             'statamic-asana.workspace_gid' => $this->faker->uuid(),
             'statamic-asana.project_gid' => $this->faker->uuid(),
-            'statamic-asana.assignee_gid' => $this->faker->uuid(),
         ]);
     }
 
