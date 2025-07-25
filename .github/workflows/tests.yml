@@ -18,6 +18,10 @@ jobs:
                 statamic: [4.*, 5.*]
                 os: [ubuntu-latest]
                 exclude:
+                    - php: 8.2
+                      laravel: 10.*
+                    - php: 8.3
+                      laravel: 10.*
                     - php: 8.4
                       laravel: 10.*
                     - statamic: 4.*
