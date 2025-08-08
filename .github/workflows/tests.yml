@@ -13,9 +13,9 @@ jobs:
 
         strategy:
             matrix:
-                php: [8.3]
+                php: [8.2, 8.3]
                 laravel: [10.*]
-                statamic: [4.*, 5.*]
+                statamic: [5.*]
                 os: [ubuntu-latest]
 
         name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - Statamic ${{ matrix.statamic }}
