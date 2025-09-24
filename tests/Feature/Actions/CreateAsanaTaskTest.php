@@ -118,7 +118,7 @@ class CreateAsanaTaskTest extends TestCase
     }
 
     /**
-     * Test that if the section_id is not set we still make the request.
+     * Test that if the section_gid is not set we still make the request.
      */
     public function test_setting_section_is_optional()
     {
@@ -150,7 +150,7 @@ class CreateAsanaTaskTest extends TestCase
             );
             $this->assertArrayNotHasKey(
                 'section',
-                $request->data()['data']['memberships'][0],
+                $request->data()['data']['memberships'][0]
             );
 
             return true;
