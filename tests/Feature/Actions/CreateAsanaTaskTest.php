@@ -86,7 +86,7 @@ class CreateAsanaTaskTest extends TestCase
     public function test_setting_assignee_is_optional()
     {
         config([
-            'statamic-asana.assignee_gid' => ''
+            'statamic-asana.assignee_gid' => '',
         ]);
 
         Http::fake([
@@ -123,7 +123,7 @@ class CreateAsanaTaskTest extends TestCase
     public function test_setting_section_is_optional()
     {
         config([
-            'statamic-asana.section_gid' => ''
+            'statamic-asana.section_gid' => '',
         ]);
 
         Http::fake([
