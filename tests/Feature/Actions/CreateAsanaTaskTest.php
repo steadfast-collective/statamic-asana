@@ -20,6 +20,8 @@ class CreateAsanaTaskTest extends TestCase
             'statamic-asana.api_personal_access_token' => $this->faker->uuid(),
             'statamic-asana.workspace_gid' => $this->faker->uuid(),
             'statamic-asana.project_gid' => $this->faker->uuid(),
+            'statamic-asana.section_gid' => $this->faker->uuid(),
+            'statamic-asana.assignee_gid' => $this->faker->uuid(),
         ]);
     }
 
@@ -60,10 +62,14 @@ class CreateAsanaTaskTest extends TestCase
                     'resource_subtype' => 'default_task',
                     'completed' => false,
                     'due_on' => now()->addDay()->toDateString(),
-                    'projects' => [
-                        config('statamic-asana.project_gid'),
+                    'memberships' => [
+                        [
+                            'project' => config('statamic-asana.project_gid'),
+                            'section' => config('statamic-asana.section_gid'),
+                        ],
                     ],
                     'workspace' => config('statamic-asana.workspace_gid'),
+                    'assignee' => config('statamic-asana.assignee_gid'),
                 ],
             ],
                 $request->data()
@@ -79,7 +85,9 @@ class CreateAsanaTaskTest extends TestCase
      */
     public function test_setting_assignee_is_optional()
     {
-        config('statamic-asana.assignee_gid', '');
+        config([
+            'statamic-asana.assignee_gid' => '',
+        ]);
 
         Http::fake([
             '*' => Http::response([
@@ -103,6 +111,46 @@ class CreateAsanaTaskTest extends TestCase
             $this->assertArrayNotHasKey(
                 'data.assignee',
                 $request->data(),
+            );
+
+            return true;
+        });
+    }
+
+    /**
+     * Test that if the section_gid is not set we still make the request.
+     */
+    public function test_setting_section_is_optional()
+    {
+        config([
+            'statamic-asana.section_gid' => '',
+        ]);
+
+        Http::fake([
+            '*' => Http::response([
+                'data' => [
+                    'permalink_url' => 'https://example.com/permalink',
+                ],
+            ], 200),
+        ]);
+
+        $form = new Form;
+        $form->set('name', 'Some Name');
+
+        $submission = new Submission;
+        $submission->form($form);
+
+        (new CreateAsanaTask)->handle(
+            AsanaTaskData::fromFormSubmission($submission)
+        );
+        Http::assertSent(function ($request) {
+            $this->assertNotEmpty(
+                $request->data()['data']['memberships'],
+                'Test Error: There were no membership items at all'
+            );
+            $this->assertArrayNotHasKey(
+                'section',
+                $request->data()['data']['memberships'][0]
             );
 
             return true;

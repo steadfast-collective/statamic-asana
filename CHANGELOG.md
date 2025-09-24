@@ -11,3 +11,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
  - Create a task when a form is submitted
  - Add meta data from the session
+ - Added support for creating the task in a specific Section
+ - Fixed a bug in the Assignee test
