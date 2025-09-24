@@ -43,6 +43,7 @@ Add the following to your .env:
 STATAMIC_ASANA_PERSONAL_ACCESS_TOKEN= # Make this at https://app.asana.com/0/my-apps
 STATAMIC_ASANA_WORKSPACE_ID="" # Get this from https://app.asana.com/api/1.0/workspaces?opt_pretty
 STATAMIC_ASANA_PROJECT_GID= # Get this from https://app.asana.com/api/1.0/projects?opt_pretty
+STATAMIC_ASANA_SECTION_GID= # Get this from https://app.asana.com/api/1.0/projects/<PROJECT_GID>/sections?opt_pretty
 ```
 
 I presume there's a way to publish  `config/statamic/statamic-asana.php` to customise it but I haven't yet looked into that aspect of Statamic addons.

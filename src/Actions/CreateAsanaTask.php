@@ -77,9 +77,12 @@ class CreateAsanaTask
             'resource_subtype' => 'default_task',
             'completed' => false,
             'due_on' => now()->addDay()->toDateString(),
-
-            'projects' => [config('statamic-asana.project_gid')],
             'workspace' => config('statamic-asana.workspace_gid'),
+            'memberships' => [
+                [
+                    'project' => config('statamic-asana.project_gid'),
+                ],
+            ],
 
             'name' => $this->asanaTaskData->name,
             'html_notes' => $this->asanaTaskData->html_notes,
@@ -88,6 +91,11 @@ class CreateAsanaTask
         // Assignee is optional
         if (filled($assigneeGid = config('statamic-asana.assignee_gid'))) {
             $data['assignee'] = $assigneeGid;
+        }
+
+        // Section is optional
+        if (filled($sectionGid = config('statamic-asana.section_gid'))) {
+            $data['memberships'][0]['section'] = $sectionGid;
         }
 
         return $data;

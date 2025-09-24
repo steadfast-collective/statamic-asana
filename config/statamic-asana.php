@@ -4,6 +4,7 @@ return [
     'api_personal_access_token' => env('STATAMIC_ASANA_API_PERSONAL_ACCESS'),
     'workspace_gid' => env('STATAMIC_ASANA_WORKSPACE_GID'),
     'project_gid' => env('STATAMIC_ASANA_PROJECT_GID'),
+    'section_gid' => env('STATAMIC_ASANA_SECTION_GID'),
 
     /**
      * The value of these keys will be included in the meta data collected saved
