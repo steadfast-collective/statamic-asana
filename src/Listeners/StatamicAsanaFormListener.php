@@ -10,7 +10,7 @@ use SteadfastCollective\StatamicAsana\Jobs\SendFormDataToAsana;
  */
 class StatamicAsanaFormListener
 {
-    public function handle(FormSubmitted $event): bool
+    public function handle(FormSubmitted $event): void
     {
         $meta = [
             'http_referrer' => request()->headers->get('referer', 'none'),
@@ -26,7 +26,5 @@ class StatamicAsanaFormListener
         SendFormDataToAsana::dispatch(
             $event->submission,
         );
-
-        return true;
     }
 }
